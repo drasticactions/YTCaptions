@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:YTCaptions" 
+             xmlns:design="clr-namespace:YTCaptions.ViewModels;assembly=YTCaptions"
+             xmlns:converters="clr-namespace:YTCaptions.Converters;assembly=YTCaptions"
+             BindingContext="{x:Static design:ViewModelLocator.YTSearchViewModel}"
+             x:Class="YTCaptions.MainPage">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+          <converters:TextEncodeConverter x:Key="TextEncodeConverter"></converters:TextEncodeConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <StackLayout VerticalOptions="StartAndExpand">
+        <SearchBar x:Name="SearchBar" 
+                   SearchCommand="{Binding SearchCommand}"
+                   SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}" 
+                   Placeholder="Enter Search Terms" />
+        <CollectionView 
+            ItemsSource="{Binding Items, Mode=OneWay}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                        Span="2" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                   <StackLayout>
+                        <Image HeightRequest="88" WidthRequest="88" 
+                               Source="{Binding Snippet.Thumbnails.Default__.Url}" />
+                        <Label HorizontalTextAlignment="Center" Text="{Binding Snippet.Title, Converter={StaticResource TextEncodeConverter}}" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>
