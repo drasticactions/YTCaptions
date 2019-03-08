@@ -29,7 +29,10 @@ namespace YTCaptions
 
         async void OnSelectedItem(object sender, SelectedItemChangedEventArgs args)
         {
-            await viewModel.TempGetVideoLink();
+            var caption = args.SelectedItem as ClosedCaption;
+            if (caption == null)
+                return;
+            await viewModel.TempGetVideoLink(caption);
             CaptionsListView.SelectedItem = null;
         }
     }

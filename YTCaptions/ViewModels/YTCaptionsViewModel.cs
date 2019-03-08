@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Apis.YouTube.v3.Data;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 using YoutubeExplode.Models.ClosedCaptions;
+using YoutubeExplode.Models.MediaStreams;
+using YTCaptions.Tools;
 
 namespace YTCaptions.ViewModels
 {
@@ -68,10 +71,14 @@ namespace YTCaptions.ViewModels
             }
         }
 
-        public async Task TempGetVideoLink()
+        public async Task TempGetVideoLink(ClosedCaption caption)
         {
-            var video = await YouTubeWebsite.GetVideoMediaStreamInfosAsync(videoId);
+            var videoMedia = await YouTubeWebsite.GetVideoMediaStreamInfosAsync(videoId);
+            var video = await YouTubeWebsite.GetVideoAsync(videoId);
             var test = JsonConvert.SerializeObject(video);
+            var test2 = JsonConvert.SerializeObject(videoMedia);
+            var test3 = videoMedia.Muxed.WithHighestVideoQuality();
+            var poop = await VideoTools.GetVideoClip(videoMedia.Muxed.WithHighestVideoQuality(), video.Duration, caption);
         }
     }
 }
