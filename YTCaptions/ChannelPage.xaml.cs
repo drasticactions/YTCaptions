@@ -31,10 +31,13 @@ namespace YTCaptions
             // TODO: Temp workaround
             if (args.CurrentSelection.Count != 1)
                 return;
-            var item = args.CurrentSelection.First() as PlaylistItem;
+            var item = args.CurrentSelection.FirstOrDefault() as PlaylistItem;
             if (item == null) return;
             var caption = await viewModel.TempGetCaptions(item);
-
+            var captionPage = new CaptionsPage(item.Snippet.Title, item.Snippet.ResourceId.VideoId, caption);
+            await Navigation.PushAsync(captionPage);
+            await captionPage.GetCaptionsAsync();
+            VideoCollectionView.SelectedItem = null;
         }
     }
 }

@@ -15,11 +15,22 @@ namespace YTCaptions
     {
         YTCaptionsViewModel viewModel;
 
-        public CaptionsPage(string title, ClosedCaptionTrackInfo info)
+        public CaptionsPage(string title, string id, ClosedCaptionTrackInfo info)
         {
             InitializeComponent();
             On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
-            BindingContext = viewModel = new YTCaptionsViewModel(title, info);
+            BindingContext = viewModel = new YTCaptionsViewModel(title, id, info);
+        }
+
+        public async Task GetCaptionsAsync()
+        {
+            await viewModel.ExecuteGetCaptionAsync();
+        }
+
+        async void OnSelectedItem(object sender, SelectedItemChangedEventArgs args)
+        {
+            await viewModel.TempGetVideoLink();
+            CaptionsListView.SelectedItem = null;
         }
     }
 }
