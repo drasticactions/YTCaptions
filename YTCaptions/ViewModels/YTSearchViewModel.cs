@@ -24,12 +24,6 @@ namespace YTCaptions.ViewModels
         public ObservableRangeCollection<SearchResult> Items { get; set; } = new ObservableRangeCollection<SearchResult>();
         public string Text { get; set; }
 
-        YouTubeService youtubeService = new YouTubeService(new BaseClientService.Initializer()
-        {
-            ApiKey = "AIzaSyAxPNzkE__p8jSJN9QzV5BJUYVqad18YzU",
-            ApplicationName = "Caption"
-        });
-
         async Task ExecuteSearchCommand(string searchParameter)
         {
             if (string.IsNullOrEmpty(searchParameter))
@@ -40,12 +34,11 @@ namespace YTCaptions.ViewModels
             try
             {
                 Items.RemoveAll(n => true);
-                var searchListRequest = youtubeService.Search.List("snippet");
+                var searchListRequest = YouTubeService.Search.List("snippet");
                 searchListRequest.Q = searchParameter;
                 searchListRequest.MaxResults = 50;
                 var result = await searchListRequest.ExecuteAsync();
                 Items.AddRange(result.Items);
-                //Items.First().Thumbnails.Default__.Width
             }
             catch (Exception e)
             {

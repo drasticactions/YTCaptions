@@ -2,13 +2,20 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
+using Google.Apis.Services;
+using Google.Apis.YouTube.v3;
 using Xamarin.Forms;
 
 namespace YTCaptions.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        public YouTubeService YouTubeService { get; set; } = new YouTubeService(new BaseClientService.Initializer()
+        {
+            ApiKey = "AIzaSyAxPNzkE__p8jSJN9QzV5BJUYVqad18YzU",
+            ApplicationName = "Caption"
+        });
+
         bool isBusy = false;
         public bool IsBusy
         {

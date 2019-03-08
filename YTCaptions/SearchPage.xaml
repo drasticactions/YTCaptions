@@ -5,7 +5,8 @@
              xmlns:design="clr-namespace:YTCaptions.ViewModels;assembly=YTCaptions"
              xmlns:converters="clr-namespace:YTCaptions.Converters;assembly=YTCaptions"
              BindingContext="{x:Static design:ViewModelLocator.YTSearchViewModel}"
-             x:Class="YTCaptions.MainPage">
+             Title="Search"
+             x:Class="YTCaptions.SearchPage">
     
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -18,7 +19,7 @@
                    SearchCommand="{Binding SearchCommand}"
                    SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}" 
                    Placeholder="Enter Search Terms" />
-        <CollectionView 
+        <CollectionView x:Name="SearchCollectionView" SelectionMode="Single" SelectionChanged="OnSelectionChanged"
             ItemsSource="{Binding Items, Mode=OneWay}">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical"

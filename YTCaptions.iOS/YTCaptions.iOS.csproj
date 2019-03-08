@@ -126,6 +126,9 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.0.0.169046-pre5" />
     <PackageReference Include="Xamarin.Essentials" Version="1.0.1" />
+    <PackageReference Include="Xam.Plugins.Forms.ImageCircle">
+      <Version>3.1.1.1-beta</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -135,6 +138,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\placeholder_avatar.png" />
+    <BundleResource Include="Resources\sample-banner.jpg" />
+    <BundleResource Include="Resources\sample-avatar.jpg" />
+    <BundleResource Include="Resources\default.jpg" />
   </ItemGroup>
 </Project>
