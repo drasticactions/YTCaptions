@@ -11,6 +11,7 @@ using Google.Apis.YouTube.v3.Data;
 
 using Newtonsoft.Json;
 using YoutubeExplode;
+using YoutubeExplode.Models.ClosedCaptions;
 
 namespace YTCaptions.ViewModels
 {
@@ -63,6 +64,12 @@ namespace YTCaptions.ViewModels
             channelListRequest.MaxResults = 25;
             listResponse = await channelListRequest.ExecuteAsync();
             Items.AddRange(listResponse.Items);
+        }
+
+        public async Task<ClosedCaptionTrackInfo> TempGetCaptions(PlaylistItem item)
+        {
+            var captions = await YouTubeWebsite.GetVideoClosedCaptionTrackInfosAsync(item.Snippet.ResourceId.VideoId);
+            return captions.FirstOrDefault();
         }
     }
 }
