@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-
+using MoreLinq;
 using Xamarin.Forms;
 using YoutubeExplode.Models;
 
@@ -17,24 +18,7 @@ namespace YTCaptions.ViewModels
 
         public Command SearchCommand { get; set; }
         public string Text { get; set; }
-        Playlist channelVideosPlaylist;
-        Channel channel;
-
-        #region Playlists
-
-        public Playlist ChannelVideosPlaylist
-        {
-            get { return channelVideosPlaylist; }
-            set { SetProperty(ref channelVideosPlaylist, value); }
-        }
-
-        #endregion
-
-        public Channel Channel
-        {
-            get { return channel; }
-            set { SetProperty(ref channel, value); }
-        }
+        public ObservableRangeCollection<Channel> Items { get; set; } = new ObservableRangeCollection<Channel>();
 
         async Task ExecuteSearchCommand(string searchParameter)
         {
@@ -45,12 +29,14 @@ namespace YTCaptions.ViewModels
 
             try
             {
-                var result = await YouTubeWebsite.GetChannelIdAsync(searchParameter);
-                if (string.IsNullOrEmpty(result))
-                    return;
-                Channel = await YouTubeWebsite.GetChannelAsync(result);
-                ChannelVideosPlaylist = await YouTubeWebsite.GetPlaylistAsync(Channel.GetChannelVideosPlaylistId(), 1);
-                //ChannelVideosPlaylist.Videos.First().Tit
+                Items.RemoveAll(n => true);
+                var results = await YouTubeWebsite.SearchVideosAsync(searchParameter, 1);
+                var distinctResults = results.DistinctBy(n => n.Author);
+                foreach(var vid in distinctResults)
+                {
+                    var channel = await YouTubeWebsite.GetVideoAuthorChannelAsync(vid.Id);
+                    Items.Add(channel);
+                }
             }
             catch (Exception e)
             {

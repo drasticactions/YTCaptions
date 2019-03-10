@@ -70,16 +70,6 @@ namespace YTCaptions.ViewModels
                 IsBusy = false;
             }
         }
-
-        public async Task TempGetVideoLink(ClosedCaption caption)
-        {
-            var videoMedia = await YouTubeWebsite.GetVideoMediaStreamInfosAsync(VideoId);
-            var video = await YouTubeWebsite.GetVideoAsync(VideoId);
-            var test = JsonConvert.SerializeObject(video);
-            var test2 = JsonConvert.SerializeObject(videoMedia);
-            var test3 = videoMedia.Muxed.WithHighestVideoQuality();
-            var poop = await VideoTools.GetVideoClip(videoMedia.Muxed.WithHighestVideoQuality(), video.Duration, caption);
-        }
     }
 }
 

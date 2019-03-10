@@ -30,8 +30,6 @@ namespace YTCaptions.ViewModels
 
         public static YTSearchChannelsViewModel YTSearchChannelsViewModel =>
            channelSearchVM ?? (channelSearchVM = new YTSearchChannelsViewModel() {
-               Channel = ViewModelDesignGenerator.GetYTChannel(),
-               ChannelVideosPlaylist = ViewModelDesignGenerator.GetYTPlaylist()
            });
     }
 
