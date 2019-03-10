@@ -11,7 +11,7 @@ namespace YTCaptions
         {
             InitializeComponent();
             Core.Initialize();
-            MainPage = new NavigationPage(new SearchChannelsPage());
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()
