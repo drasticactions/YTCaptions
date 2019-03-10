@@ -23,7 +23,10 @@ namespace YTCaptions
             VideoListView.SelectedItem = null;
             var captions = await viewModel.GetCaptions(vidItem.Id);
             if (captions.Count <= 0)
+            {
+                await DisplayAlert("Captions", $"No Captions Available for \"{vidItem.Title}\"!", "Dang!");
                 return;
+            }
             ClosedCaptionTrackInfo info;
             if (captions.Count == 1)
                 info = captions.First();
