@@ -13,11 +13,6 @@ namespace YTCaptions.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public YoutubeClient YouTubeWebsite { get; set; } = new YoutubeClient();
-        public YouTubeService YouTubeService { get; set; } = new YouTubeService(new BaseClientService.Initializer
-        {
-            ApiKey = "AIzaSyAxPNzkE__p8jSJN9QzV5BJUYVqad18YzU",
-            ApplicationName = "Caption"
-        });
 
         bool isBusy = false;
         public bool IsBusy
