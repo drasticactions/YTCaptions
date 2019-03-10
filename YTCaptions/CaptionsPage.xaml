@@ -30,7 +30,10 @@
                     </Keyboard>
                 </SearchBar.Keyboard>            
             </SearchBar>
-            <ListView x:Name="CaptionsListView" SelectionMode="Single" ItemSelected="OnSelectedItem" HasUnevenRows="true" ItemsSource="{Binding Captions}">
+            <ListView x:Name="CaptionsListView" 
+                      SelectionMode="Single" 
+                      ItemSelected="OnSelectedItem"
+                      HasUnevenRows="true" ItemsSource="{Binding Captions}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

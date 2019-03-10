@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using System.Linq;
 
 using Xamarin.Forms;
-
-using Google.Apis.Services;
-using Google.Apis.YouTube.v3;
-using Google.Apis.YouTube.v3.Data;
-
-using Newtonsoft.Json;
 
 namespace YTCaptions.ViewModels
 {

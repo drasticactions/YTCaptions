@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:YTCaptions" 
+    xmlns:design="clr-namespace:YTCaptions.ViewModels;assembly=YTCaptions"
+    xmlns:converters="clr-namespace:YTCaptions.Converters;assembly=YTCaptions"
+    Title="Search Channels"
+    x:Class="YTCaptions.SearchChannelsPage">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+          <converters:TextEncodeConverter x:Key="TextEncodeConverter"></converters:TextEncodeConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+      <StackLayout VerticalOptions="StartAndExpand">
+            <SearchBar x:Name="SearchBar" 
+                   SearchCommand="{Binding SearchCommand}"
+                   SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}" 
+                   Placeholder="Enter Search Terms" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" WidthRequest="88" HeightRequest="88" Source="{Binding Channel.LogoUrl}" />
+                <Label Grid.Column="1" VerticalOptions="Center" Text="{Binding Channel.Title}"/>
+            </Grid>
+            <ListView 
+                x:Name="VideoListView"
+                HasUnevenRows="true" 
+                SelectionMode="Single" 
+                ItemSelected="OnSelectedItem"
+                ItemsSource="{Binding ChannelVideosPlaylist.Videos, Mode=OneWay}">
+                <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                            
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" WidthRequest="88" HeightRequest="88" Source="{Binding Thumbnails.StandardResUrl}" />
+                                <Label Grid.Column="1" VerticalOptions="Center" Text="{Binding Title}"/>
+                            </Grid>
+                        </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>  
+        
+    </ContentPage.Content>
+</ContentPage>

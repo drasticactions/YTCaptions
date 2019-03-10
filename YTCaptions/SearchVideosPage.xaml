@@ -4,8 +4,7 @@
              xmlns:local="clr-namespace:YTCaptions" 
              xmlns:design="clr-namespace:YTCaptions.ViewModels;assembly=YTCaptions"
              xmlns:converters="clr-namespace:YTCaptions.Converters;assembly=YTCaptions"
-             BindingContext="{x:Static design:ViewModelLocator.YTSearchViewModel}"
-             Title="Search"
+             Title="Search Videos"
              x:Class="YTCaptions.SearchVideosPage">
     
     <ContentPage.Resources>

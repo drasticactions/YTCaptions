@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
 using YoutubeExplode;
+using YoutubeExplode.Models.ClosedCaptions;
 
 namespace YTCaptions.ViewModels
 {
@@ -29,6 +31,11 @@ namespace YTCaptions.ViewModels
         {
             get { return title; }
             set { SetProperty(ref title, value); }
+        }
+
+        public async Task<IReadOnlyList<ClosedCaptionTrackInfo>> GetCaptions(string videoId)
+        {
+            return await YouTubeWebsite.GetVideoClosedCaptionTrackInfosAsync(videoId);
         }
 
         protected bool SetProperty<T>(ref T backingStore, T value,

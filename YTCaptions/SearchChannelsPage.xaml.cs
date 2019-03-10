@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Google.Apis.YouTube.v3.Data;
+﻿using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using YoutubeExplode.Models.ClosedCaptions;
@@ -11,23 +6,21 @@ using YTCaptions.ViewModels;
 
 namespace YTCaptions
 {
-    public partial class SearchVideosPage : ContentPage
+    public partial class SearchChannelsPage : ContentPage
     {
-        YTSearchVideosViewModel viewModel;
-        public SearchVideosPage()
+        YTSearchChannelsViewModel viewModel;
+        public SearchChannelsPage()
         {
             InitializeComponent();
             On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
-            BindingContext = viewModel = new YTSearchVideosViewModel();
+            BindingContext = viewModel = new YTSearchChannelsViewModel();
         }
 
-        async void OnSelectionChanged(object sender, SelectionChangedEventArgs args)
+        async void OnSelectedItem(object sender, SelectedItemChangedEventArgs args)
         {
-            if (args.CurrentSelection.Count != 1)
+            if (!(args.SelectedItem is YoutubeExplode.Models.Video vidItem))
                 return;
-            if (!(args.CurrentSelection[0] is YoutubeExplode.Models.Video vidItem))
-                return;
-            SearchCollectionView.SelectedItem = null;
+            VideoListView.SelectedItem = null;
             var captions = await viewModel.GetCaptions(vidItem.Id);
             if (captions.Count <= 0)
                 return;

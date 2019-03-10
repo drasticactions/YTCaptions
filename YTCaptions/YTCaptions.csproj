@@ -25,4 +25,11 @@
     <Folder Include="TemplateSelector\" />
     <Folder Include="Converters\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="ViewModels\YTChannelViewModel.cs" />
+    <Compile Remove="ChannelPage.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="ChannelPage.xaml" />
+  </ItemGroup>
 </Project>

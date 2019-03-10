@@ -150,5 +150,6 @@
     <BundleResource Include="Resources\sample-banner.jpg" />
     <BundleResource Include="Resources\sample-avatar.jpg" />
     <BundleResource Include="Resources\default.jpg" />
+    <BundleResource Include="Resources\logo.jpg" />
   </ItemGroup>
 </Project>
