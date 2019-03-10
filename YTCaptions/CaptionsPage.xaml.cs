@@ -32,7 +32,9 @@ namespace YTCaptions
             var caption = args.SelectedItem as ClosedCaption;
             if (caption == null)
                 return;
-            await viewModel.TempGetVideoLink(caption);
+            var videoPage = new VideoPage();
+            await Navigation.PushModalAsync(new Xamarin.Forms.NavigationPage(videoPage));
+            await videoPage.PlayVideo(viewModel.VideoId, caption);
             CaptionsListView.SelectedItem = null;
         }
     }

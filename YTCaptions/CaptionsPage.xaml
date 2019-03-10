@@ -37,7 +37,7 @@
                             <StackLayout>
                                 <Label HorizontalTextAlignment="Start" Text="{Binding Offset, Converter={StaticResource TimeSpanConverter}}" />
                                 <Label HorizontalTextAlignment="Start" Text="{Binding Duration, Converter={StaticResource TimeSpanConverter}}" />
-                                <Label HorizontalTextAlignment="Start" Text="{Binding Text, Converter={StaticResource NewLineConverter}}" />
+                                <Label HorizontalTextAlignment="Start" Text="{Binding Text}}" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

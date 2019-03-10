@@ -26,7 +26,7 @@ namespace YTCaptions.ViewModels
         public string Text { get; set; }
         public List<ClosedCaption> AllCaptions { get; set; } = new List<ClosedCaption>();
         public string VideoTitle { get; set; }
-        string videoId;
+        public string VideoId { get; set; }
         public Command SearchCommand { get; set; }
 
         public ClosedCaptionTrack Track
@@ -40,7 +40,7 @@ namespace YTCaptions.ViewModels
             SearchCommand = new Command(async (text) => await ExecuteSearchCommand((string)text));
             trackInfo = item;
             VideoTitle = title;
-            videoId = id;
+            VideoId = id;
         }
 
         async Task ExecuteSearchCommand(string searchParameter)
@@ -73,8 +73,8 @@ namespace YTCaptions.ViewModels
 
         public async Task TempGetVideoLink(ClosedCaption caption)
         {
-            var videoMedia = await YouTubeWebsite.GetVideoMediaStreamInfosAsync(videoId);
-            var video = await YouTubeWebsite.GetVideoAsync(videoId);
+            var videoMedia = await YouTubeWebsite.GetVideoMediaStreamInfosAsync(VideoId);
+            var video = await YouTubeWebsite.GetVideoAsync(VideoId);
             var test = JsonConvert.SerializeObject(video);
             var test2 = JsonConvert.SerializeObject(videoMedia);
             var test3 = videoMedia.Muxed.WithHighestVideoQuality();

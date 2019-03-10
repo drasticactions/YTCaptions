@@ -1,4 +1,5 @@
 ﻿using System;
+using LibVLCSharp.Shared;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,8 +10,8 @@ namespace YTCaptions
         public App()
         {
             InitializeComponent();
-
-            MainPage = new NavigationPage(new SearchPage()); ;
+            Core.Initialize();
+            MainPage = new NavigationPage(new SearchVideosPage());
         }
 
         protected override void OnStart()

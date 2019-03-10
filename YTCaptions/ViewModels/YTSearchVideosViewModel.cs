@@ -13,15 +13,15 @@ using Newtonsoft.Json;
 
 namespace YTCaptions.ViewModels
 {
-    public class YTSearchViewModel : BaseViewModel
+    public class YTSearchVideosViewModel : BaseViewModel
     {
-        public YTSearchViewModel()
+        public YTSearchVideosViewModel()
         {
             SearchCommand = new Command(async (text) => await ExecuteSearchCommand((string)text));
         }
 
         public Command SearchCommand { get; set; }
-        public ObservableRangeCollection<SearchResult> Items { get; set; } = new ObservableRangeCollection<SearchResult>();
+        public ObservableRangeCollection<YoutubeExplode.Models.Video> Items { get; set; } = new ObservableRangeCollection<YoutubeExplode.Models.Video>();
         public string Text { get; set; }
 
         async Task ExecuteSearchCommand(string searchParameter)
@@ -30,15 +30,12 @@ namespace YTCaptions.ViewModels
                 return;
 
             IsBusy = true;
-
+            
             try
             {
                 Items.RemoveAll(n => true);
-                var searchListRequest = YouTubeService.Search.List("snippet");
-                searchListRequest.Q = searchParameter;
-                searchListRequest.MaxResults = 50;
-                var result = await searchListRequest.ExecuteAsync();
-                Items.AddRange(result.Items);
+                var result = await YouTubeWebsite.SearchVideosAsync(searchParameter, 1);
+                Items.AddRange(result);
             }
             catch (Exception e)
             {

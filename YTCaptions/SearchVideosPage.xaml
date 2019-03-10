@@ -6,7 +6,7 @@
              xmlns:converters="clr-namespace:YTCaptions.Converters;assembly=YTCaptions"
              BindingContext="{x:Static design:ViewModelLocator.YTSearchViewModel}"
              Title="Search"
-             x:Class="YTCaptions.SearchPage">
+             x:Class="YTCaptions.SearchVideosPage">
     
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -29,8 +29,8 @@
                 <DataTemplate>
                    <StackLayout>
                         <Image HeightRequest="88" WidthRequest="88" 
-                               Source="{Binding Snippet.Thumbnails.Default__.Url}" />
-                        <Label HorizontalTextAlignment="Center" Text="{Binding Snippet.Title, Converter={StaticResource TextEncodeConverter}}" />
+                               Source="{Binding Thumbnails.StandardResUrl}" />
+                        <Label HorizontalTextAlignment="Center" Text="{Binding Title, Converter={StaticResource TextEncodeConverter}}" />
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

@@ -10,30 +10,30 @@ using YTCaptions.ViewModels;
 
 namespace YTCaptions
 {
-    public partial class SearchPage : ContentPage
+    public partial class SearchVideosPage : ContentPage
     {
-        YTSearchViewModel viewModel;
-        public SearchPage()
+        YTSearchVideosViewModel viewModel;
+        public SearchVideosPage()
         {
             InitializeComponent();
             On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
-            BindingContext = viewModel = new YTSearchViewModel();
+            BindingContext = viewModel = new YTSearchVideosViewModel();
         }
 
         async void OnSelectionChanged(object sender, SelectionChangedEventArgs args)
         {
             if (args.CurrentSelection.Count != 1)
                 return;
-            if (!(args.CurrentSelection[0] is SearchResult searchItem))
+            if (!(args.CurrentSelection[0] is YoutubeExplode.Models.Video searchItem))
                 return;
-            switch (searchItem.Id.Kind)
-            {
-                case "youtube#channel":
-                    var channelPage = new ChannelPage(searchItem.Snippet.ChannelTitle);
-                    await Navigation.PushAsync(channelPage);
-                    await channelPage.SetChannelInfoAsync(searchItem.Id.ChannelId);
-                    break;
-            }
+            //switch (searchItem.Id.Kind)
+            //{
+            //    case "youtube#channel":
+            //        var channelPage = new ChannelPage(searchItem.Snippet.ChannelTitle);
+            //        await Navigation.PushAsync(channelPage);
+            //        await channelPage.SetChannelInfoAsync(searchItem.Id.ChannelId);
+            //        break;
+            //}
             SearchCollectionView.SelectedItem = null;
         }
     }
